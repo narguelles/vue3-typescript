@@ -1,0 +1,5 @@
+export enum CountActionTypes {
+  FETCH_DOCUMENTS = "FETCH_DOCUMENTS",
+  ADD_COUNTER = "ADD_COUNTER",
+  FETCH_API = "FETCH_API",
+}

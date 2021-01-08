@@ -1,18 +1,43 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <main class="font-sans bg-white">
+    <div>
+      <section class="bg-white mt-20">
+        <div class="max-w-2xl px-6 text-center mx-auto">
+          <h2 class="text-3xl font-semibold text-gray-800">
+            Vue 3 + Typescript + Tailwind + Element UI Plus.
+          </h2>
+
+          <div class="flex items-end justify-center mt-16">
+            <h5 class="text-lg ">Count: {{ getCount }}</h5>
+          </div>
+          <div class="flex items-end justify-center mt-16">
+            <el-button type="primary" plain @click="increment"
+              >Increment</el-button
+            >
+          </div>
+          {{ getData }}
+        </div>
+      </section>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { defineComponent } from "vue";
+import { mapGetters } from "vuex";
+import { useStore } from "@/store";
+import { CountActionTypes } from "@/store/modules/types/action-types";
 
-@Options({
-  components: {
-    HelloWorld,
+export default defineComponent({
+  name: "Home",
+  computed: {
+    ...mapGetters(["getCount", "getData"]),
   },
-})
-export default class Home extends Vue {}
+  methods: {
+    increment() {
+      const store = useStore();
+      store.dispatch(CountActionTypes.FETCH_API, null);
+    },
+  },
+});
 </script>
